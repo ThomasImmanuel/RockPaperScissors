@@ -31,7 +31,7 @@ function playRound(playerSelection, computerSelection) {
         return ["You lose! Rock beats scissors", "lose"]
     } else if (playerSelection === 'scissors' & computerSelection === 'paper') {
         return ["You win! Scissors beats Paper", "win"]
-    } else if (playerSelection === 'scissors' & computerSelection === 'Scissors') {
+    } else if (playerSelection === 'scissors' & computerSelection === 'scissors') {
         return ["It´s a tie!", "tie"]
     } 
 }
@@ -39,39 +39,85 @@ function playRound(playerSelection, computerSelection) {
 const playerSelection = "PaPer";
 const computerSelection = getComputerChoice();
 
-console.log(playRound(playerSelection, computerSelection));
+// console.log(playRound(playerSelection, computerSelection));
 
-//Fuction that plays five rounds and calculates and returns final score
-function game() {
-    //tracking the score
-    let scorePlayer = 0
-    let scoreComputer = 0
+// //Fuction that plays five rounds and calculates and returns final score
+// function game() {
+//     //tracking the score
+//     let scorePlayer = 0
+//     let scoreComputer = 0
 
-    //loop that plays five rounds and adds up score
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt("Pick rock, paper or scissors");
-        let game = playRound(playerSelection, getComputerChoice());
-        if (game[1] === "win") {
-            scorePlayer += 1;
-            alert(game[0]);
-        } else if (game[1] === "lose") {
-            scoreComputer += 1;
-            alert(game[0]);
-        } else {
-            scoreComputer += 0.5;
-            scorePlayer += 0.5;
-            alert(game[0]);
-        }
+//     //loop that plays five rounds and adds up score
+//     for (let i = 0; i < 5; i++) {
+//         let playerSelection = prompt("Pick rock, paper or scissors");
+//         let game = playRound(playerSelection, getComputerChoice());
+//         if (game[1] === "win") {
+//             scorePlayer += 1;
+//             alert(game[0]);
+//         } else if (game[1] === "lose") {
+//             scoreComputer += 1;
+//             alert(game[0]);
+//         } else {
+//             scoreComputer += 0.5;
+//             scorePlayer += 0.5;
+//             alert(game[0]);
+//         }
+//     }
+
+//     // Returns final score
+//     if (scoreComputer < scorePlayer) {
+//         return `Congratulations, you won! the final score is player:${scorePlayer} to computer:${scoreComputer}`
+//     }   else if (scoreComputer > scorePlayer) {
+//         return `Sorry, you lost! the final score is player:${scorePlayer} to computer:${scoreComputer}`
+//     } else {
+//         return 'It´s a tie';
+//     };
+// }
+
+//Plays one game of rps with input and displays the score
+function oneGame(playerSelection) {
+    let game = playRound(playerSelection,getComputerChoice());
+    if (game[1] === "win") {
+        scorePlayer += 1;
+    } else if (game[1] === "lose") {
+        scoreComputer += 1;
+    } 
+    displayResult.textContent = `You: ${scorePlayer} Computer: ${scoreComputer}`;
+
+    //If either player or computer gets five wins the score is reset
+    if (scorePlayer === 5) {
+        displayResult.textContent = `Congratulations! you won with ${scorePlayer} to ${scoreComputer}`;
+        scorePlayer = 0;
+        scoreComputer = 0;
+    } else if (scoreComputer === 5) {
+        displayResult.textContent = `Too bad, you lost with ${scorePlayer} to ${scoreComputer}`;
+        scorePlayer = 0;
+        scoreComputer = 0;
     }
-
-    // Returns final score
-    if (scoreComputer < scorePlayer) {
-        return `Congratulations, you won! the final score is player:${scorePlayer} to computer:${scoreComputer}`
-    }   else if (scoreComputer > scorePlayer) {
-        return `Sorry, you lost! the final score is player:${scorePlayer} to computer:${scoreComputer}`
-    } else {
-        return 'It´s a tie';
-    };
 }
 
-console.log(game());
+//Getting all elements used from the DOM
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+const displayResult = document.querySelector('#displayResult');
+
+//Variables to track the score
+let scorePlayer = 0;
+let scoreComputer = 0;
+
+//event-listeners to track button click and play a game and keep score
+rockBtn.addEventListener('click', () => {
+    oneGame('rock');
+
+});
+
+paperBtn.addEventListener('click', () => {
+    oneGame('paper');
+});
+
+scissorsBtn.addEventListener('click', () => {
+    oneGame('scissors');
+})
+
+// console.log(game());

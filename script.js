@@ -84,8 +84,8 @@ const buttons = document.querySelector('#buttons');
 startBtn.addEventListener('click', () => {
     displayGame.setAttribute(
         'style', 
-        'display: flex; flex-direction: column; justify-content: center; align-items: center; height: 500px; row-gap: 20px;');
-    buttons.setAttribute('style', 'display: inline;');
+        'visibility: visible; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 500px; row-gap: 20px;');
+    buttons.setAttribute('style', 'display: flex;');
 
     scorePlayer = 0;
     scoreComputer = 0;
@@ -104,16 +104,21 @@ function oneGame(playerSelection) {
         scoreComputer += 1;
     } 
     displayResult.textContent = `The computer played ${game[0]}`;
+    displayResult.setAttribute('style','color: white; font-size: 20px;')
     scoreP.textContent = "You " + scorePlayer;
     scoreC.textContent = "Computer " + scoreComputer;
+    scoreC.setAttribute('style','color: white; font-size: 30px;')
+    scoreP.setAttribute('style','color: white; font-size: 30px;')
     //If either player or computer gets five wins the score is reset
     if (scorePlayer === 5) {
         displayResult.textContent = `Congratulations! You won`;
+        displayResult.setAttribute('style','color: white; font-size: 50px;')
         scorePlayer = 0;
         scoreComputer = 0;
         buttons.setAttribute('style','display: none;')
     } else if (scoreComputer === 5) {
         displayResult.textContent = `Too bad, you lost`;
+        displayResult.setAttribute('style','color: white; font-size: 50px;')
         scorePlayer = 0;
         scoreComputer = 0;
         buttons.setAttribute('style','display: none;')

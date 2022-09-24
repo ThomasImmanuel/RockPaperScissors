@@ -74,6 +74,23 @@ const computerSelection = getComputerChoice();
 //     };
 // }
 
+
+const startBtn = document.querySelector('#start');
+const displayGame = document.querySelector('#displayGame');
+const buttons = document.querySelector('#buttons');
+
+startBtn.addEventListener('click', () => {
+    displayGame.setAttribute(
+        'style', 
+        'display: flex; flex-direction: column; justify-content: center; align-items: center; height: 500px; row-gap: 20px;');
+    buttons.setAttribute('style', 'display: inline;');
+
+    scorePlayer = 0;
+    scoreComputer = 0;
+    displayResult.textContent = '';
+});
+
+
 //Plays one game of rps with input and displays the score
 function oneGame(playerSelection) {
     let game = playRound(playerSelection,getComputerChoice());
@@ -89,11 +106,14 @@ function oneGame(playerSelection) {
         displayResult.textContent = `Congratulations! you won with ${scorePlayer} to ${scoreComputer}`;
         scorePlayer = 0;
         scoreComputer = 0;
+        buttons.setAttribute('style','display: none;')
     } else if (scoreComputer === 5) {
         displayResult.textContent = `Too bad, you lost with ${scorePlayer} to ${scoreComputer}`;
         scorePlayer = 0;
         scoreComputer = 0;
+        buttons.setAttribute('style','display: none;')
     }
+
 }
 
 //Getting all elements used from the DOM
@@ -109,7 +129,6 @@ let scoreComputer = 0;
 //event-listeners to track button click and play a game and keep score
 rockBtn.addEventListener('click', () => {
     oneGame('rock');
-
 });
 
 paperBtn.addEventListener('click', () => {
@@ -121,3 +140,4 @@ scissorsBtn.addEventListener('click', () => {
 })
 
 // console.log(game());
+

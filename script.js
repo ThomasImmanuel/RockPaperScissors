@@ -16,23 +16,23 @@ function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     //checks all possible outcomes 
     if (playerSelection === 'rock' & computerSelection === 'paper') {
-        return ["You lose! Paper beats Rock", "lose"]
+        return ["rock", "lose"]
     } else if (playerSelection === 'rock' & computerSelection === 'scissors') {
-        return ["You win! Rock beats Scissors", "win"]
+        return ["scissors", "win"]
     } else if (playerSelection === 'rock' & computerSelection === 'rock') {
-        return ["It´s a tie!", "tie"]
+        return ["rock", "tie"]
     } else if (playerSelection === 'paper' & computerSelection === 'scissors') {
-        return ["You lose! Scissors beats paper", "lose"]
+        return ["paper", "lose"]
     } else if (playerSelection === 'paper' & computerSelection === 'rock') {
-        return ["You win! Paper beats Rock", "win"]
+        return ["rock", "win"]
     } else if (playerSelection === 'paper' & computerSelection === 'paper') {
-        return ["It´s a tie!", "tie"]
+        return ["paper", "tie"]
     } else if (playerSelection === 'scissors' & computerSelection === 'rock') {
-        return ["You lose! Rock beats scissors", "lose"]
+        return ["scissors", "lose"]
     } else if (playerSelection === 'scissors' & computerSelection === 'paper') {
-        return ["You win! Scissors beats Paper", "win"]
+        return ["paper", "win"]
     } else if (playerSelection === 'scissors' & computerSelection === 'scissors') {
-        return ["It´s a tie!", "tie"]
+        return ["scissors", "tie"]
     } 
 }
 
@@ -77,6 +77,8 @@ const computerSelection = getComputerChoice();
 
 const startBtn = document.querySelector('#start');
 const displayGame = document.querySelector('#displayGame');
+const scoreP = document.querySelector('#scoreP');
+const scoreC = document.querySelector('#scoreC');
 const buttons = document.querySelector('#buttons');
 
 startBtn.addEventListener('click', () => {
@@ -88,6 +90,8 @@ startBtn.addEventListener('click', () => {
     scorePlayer = 0;
     scoreComputer = 0;
     displayResult.textContent = '';
+    scoreC.textContent = '';
+    scoreP.textContent = '';
 });
 
 
@@ -99,19 +103,21 @@ function oneGame(playerSelection) {
     } else if (game[1] === "lose") {
         scoreComputer += 1;
     } 
-    displayResult.textContent = `You: ${scorePlayer} Computer: ${scoreComputer}`;
-
+    displayResult.textContent = `The computer played ${game[0]}`;
+    scoreP.textContent = "You " + scorePlayer;
+    scoreC.textContent = "Computer " + scoreComputer;
     //If either player or computer gets five wins the score is reset
     if (scorePlayer === 5) {
-        displayResult.textContent = `Congratulations! you won with ${scorePlayer} to ${scoreComputer}`;
+        displayResult.textContent = `Congratulations! You won`;
         scorePlayer = 0;
         scoreComputer = 0;
         buttons.setAttribute('style','display: none;')
     } else if (scoreComputer === 5) {
-        displayResult.textContent = `Too bad, you lost with ${scorePlayer} to ${scoreComputer}`;
+        displayResult.textContent = `Too bad, you lost`;
         scorePlayer = 0;
         scoreComputer = 0;
         buttons.setAttribute('style','display: none;')
+        
     }
 
 }

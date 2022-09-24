@@ -1,0 +1,21 @@
+button {
+   width: 200px;; 
+}
+
+#start {
+    display: flex;
+    justify-content: center;
+}
+
+#displayGame {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    row-gap: 20px;
+    
+    /* display: none; */
+}
+
